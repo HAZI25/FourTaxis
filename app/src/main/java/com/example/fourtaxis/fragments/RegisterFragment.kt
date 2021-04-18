@@ -4,8 +4,13 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.fourtaxis.R
 import com.example.fourtaxis.database.AUTH
+import com.example.fourtaxis.database.FIRESTORE
+import com.example.fourtaxis.database.USER
+import com.example.fourtaxis.database.USERS
 import com.example.fourtaxis.utils.APP_ACTIVITY
+import com.example.fourtaxis.utils.restartActivity
 import com.example.fourtaxis.utils.showToast
+import com.google.firebase.firestore.SetOptions
 import kotlinx.android.synthetic.main.fragment_register.*
 
 
@@ -26,9 +31,22 @@ class RegisterFragment : Fragment(R.layout.fragment_register), View.OnClickListe
                     val password = et_password.text.toString()
 
                     AUTH.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
-                        if (it.isSuccessful)
-                            showToast("Success")
-                        else showToast("Registration Failed. ${it.exception?.message.toString()}")
+                        if (it.isSuccessful) {
+
+                            USER.id = AUTH.currentUser?.uid ?: ""
+                            USER.firstName = et_firstName.text.toString()
+                            USER.lastName = et_lastName.text.toString()
+                            USER.email = email
+
+                            FIRESTORE.collection(USERS).document(USER.id)
+                                .set(USER, SetOptions.merge())
+                                .addOnCompleteListener {
+                                    if (it.isSuccessful)
+                                        restartActivity()
+                                    else showToast(it.exception?.message.toString())
+                                }
+
+                        } else showToast("Registration Failed. ${it.exception?.message.toString()}")
                     }
                 }
             }

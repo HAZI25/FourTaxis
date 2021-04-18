@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import com.example.fourtaxis.R
 import com.example.fourtaxis.database.AUTH
 import com.example.fourtaxis.utils.replaceFragment
+import com.example.fourtaxis.utils.restartActivity
 import com.example.fourtaxis.utils.showToast
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -26,11 +27,8 @@ class LoginFragment : Fragment(R.layout.fragment_login), View.OnClickListener {
                     val password = et_password.text.toString()
 
                     AUTH.signInWithEmailAndPassword(email, password).addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            showToast("Success")
-                        }
-                        else
-                            showToast("Fail ${it.exception?.message.toString()}")
+                        if (it.isSuccessful) restartActivity()
+                        else showToast("Fail ${it.exception?.message.toString()}")
                     }
                 }
             }
