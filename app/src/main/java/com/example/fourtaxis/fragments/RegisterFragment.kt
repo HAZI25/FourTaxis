@@ -26,6 +26,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register), View.OnClickListe
         if (view != null)
             when (view.id) {
                 R.id.tv_login -> APP_ACTIVITY.onBackPressed()
+
                 R.id.btn_register -> {
                     val email = et_email.text.toString()
                     val password = et_password.text.toString()
@@ -34,8 +35,8 @@ class RegisterFragment : Fragment(R.layout.fragment_register), View.OnClickListe
                         if (it.isSuccessful) {
 
                             USER.id = AUTH.currentUser?.uid ?: ""
-                            USER.firstName = et_firstName.text.toString()
-                            USER.lastName = et_lastName.text.toString()
+                            USER.fullName = et_fullName.text.toString()
+                            USER.phone = et_phoneNumber.text.toString()
                             USER.email = email
 
                             FIRESTORE.collection(USERS).document(USER.id)
