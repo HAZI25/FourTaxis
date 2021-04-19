@@ -21,14 +21,13 @@
             android:layout_height="match_parent"
             android:padding="5dp">
 
-            <ImageView
-                android:id="@+id/imageView"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_user_photo"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:src="@drawable/photo_placeholder"
                 app:layout_constraintBottom_toTopOf="@+id/tv_profile_username"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,7 +41,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/profile_user_photo"
                 tools:text="Marsel Nazirov" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

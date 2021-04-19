@@ -5,6 +5,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.fourtaxis.R
 import com.example.fourtaxis.activities.MainActivity
+import com.squareup.picasso.Picasso
+import de.hdodenhof.circleimageview.CircleImageView
 
 fun replaceFragment(fragment: Fragment, addStack: Boolean = true) {
     val fm = APP_ACTIVITY.supportFragmentManager
@@ -23,4 +25,8 @@ fun restartActivity() {
     val intent = Intent(APP_ACTIVITY, MainActivity::class.java)
     APP_ACTIVITY.startActivity(intent)
     APP_ACTIVITY.finish()
+}
+
+fun CircleImageView.downloadAndSetImage(url: String) {
+    Picasso.get().load(url).fit().placeholder(R.drawable.photo_placeholder).into(this)
 }

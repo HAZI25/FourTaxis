@@ -1,25 +1,29 @@
 package com.example.fourtaxis.fragments
 
-import android.view.View
-import androidx.fragment.app.Fragment
 import com.example.fourtaxis.R
-import com.example.fourtaxis.database.USER
+import com.example.fourtaxis.database.*
 import com.example.fourtaxis.utils.APP_ACTIVITY
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.fourtaxis.utils.showToast
 import kotlinx.android.synthetic.main.fragment_change_phone.*
 
-class ChangePhoneFragment : Fragment(R.layout.fragment_change_phone) {
+class ChangePhoneFragment : BaseChangeFragment(R.layout.fragment_change_phone) {
 
     override fun onStart() {
         super.onStart()
 
-        APP_ACTIVITY.navigation_view.visibility = View.GONE
         et_change_number.setText(USER.phone)
-    }
 
-    override fun onPause() {
-        super.onPause()
-        APP_ACTIVITY.navigation_view.visibility = View.VISIBLE
+        fab_change_phone.setOnClickListener {
+            val hashMap = hashMapOf<String, Any>()
+            val number = et_change_number.text.toString()
+            hashMap[PHONE] = number
+            FIRESTORE.collection(USERS).document(CURRENT_UID).update(hashMap)
+                .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    USER.phone = number
+                    APP_ACTIVITY.supportFragmentManager.popBackStack()
+                } else showToast(it.exception?.message.toString())
+            }
+        }
     }
-
 }
