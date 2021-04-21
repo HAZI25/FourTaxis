@@ -1,4 +1,4 @@
-package com.example.fourtaxis.fragments
+package com.example.fourtaxis.fragments.profile
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent

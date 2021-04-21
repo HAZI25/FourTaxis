@@ -23,4 +23,15 @@
     <string name="register_already_have_an_account">Already have an account?</string>
     <string name="login"><u>Login</u></string>
 
+    <string-array name="rides_dest">
+        <item>Деревня Универсиады</item>
+        <item>Пушкина</item>
+        <item>Красная позиция</item>
+        <item>Кремлевская 35</item>
+        <item>Кремлевская 18</item>
+        <item>УНИКС</item>
+        <item>Бутлерова 4</item>
+        <item>Татарстан 2</item>
+        <item>Мартыны Межлаука 1</item>
+    </string-array>
 </resources>

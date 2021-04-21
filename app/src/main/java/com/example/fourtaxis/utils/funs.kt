@@ -30,3 +30,8 @@ fun restartActivity() {
 fun CircleImageView.downloadAndSetImage(url: String) {
     Picasso.get().load(url).fit().placeholder(R.drawable.photo_placeholder).into(this)
 }
+
+fun checkDateTimeDigit(digit: Int): String {
+    if (digit < 10) return "0$digit"
+    return digit.toString()
+}

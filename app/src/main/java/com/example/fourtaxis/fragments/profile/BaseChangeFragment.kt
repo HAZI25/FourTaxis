@@ -1,4 +1,4 @@
-package com.example.fourtaxis.fragments
+package com.example.fourtaxis.fragments.profile
 
 import android.view.View
 import androidx.fragment.app.Fragment

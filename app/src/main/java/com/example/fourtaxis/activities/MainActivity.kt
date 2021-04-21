@@ -9,9 +9,10 @@ import com.example.fourtaxis.R
 import com.example.fourtaxis.database.AUTH
 import com.example.fourtaxis.database.initFirebase
 import com.example.fourtaxis.database.initUser
-import com.example.fourtaxis.fragments.LoginFragment
-import com.example.fourtaxis.fragments.ProfileFragment
-import com.example.fourtaxis.fragments.RidesFragment
+import com.example.fourtaxis.fragments.login_register.LoginFragment
+import com.example.fourtaxis.fragments.profile.ProfileFragment
+import com.example.fourtaxis.fragments.rides.RidesFragment
+import com.example.fourtaxis.models.RideModel
 import com.example.fourtaxis.utils.APP_ACTIVITY
 import com.example.fourtaxis.utils.replaceFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -19,6 +20,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     lateinit var mToolbar: Toolbar
+
+    var ride = RideModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

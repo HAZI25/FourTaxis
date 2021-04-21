@@ -1,4 +1,4 @@
-package com.example.fourtaxis.fragments
+package com.example.fourtaxis.fragments.profile
 
 import com.example.fourtaxis.R
 import com.example.fourtaxis.database.*

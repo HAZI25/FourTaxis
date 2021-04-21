@@ -1,10 +1,12 @@
 package com.example.fourtaxis.database
 
 import android.net.Uri
+import com.example.fourtaxis.models.RideModel
 import com.example.fourtaxis.models.UserModel
 import com.example.fourtaxis.utils.showToast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
@@ -15,6 +17,7 @@ lateinit var FIRESTORE: FirebaseFirestore
 lateinit var REF_STORAGE: StorageReference
 
 const val USERS = "users"
+const val RIDES = "rides"
 const val PHONE = "phone"
 const val BIO = "bio"
 const val FOLDER_PROFILE_IMAGE = "folder_profile_image"
@@ -51,4 +54,14 @@ inline fun putUrlToDatabase(url: String, crossinline function: () -> Unit) {
     FIRESTORE.collection(USERS).document(CURRENT_UID).update(mapOf(PHOTO_URL to url))
         .addOnSuccessListener { function() }
         .addOnFailureListener { showToast(it.message.toString()) }
+}
+
+inline fun createRide(ride: RideModel, crossinline function: () -> Unit) {
+    FIRESTORE.collection(RIDES).document(CURRENT_UID).set(ride, SetOptions.merge()).addOnCompleteListener {
+        if (it.isSuccessful)
+            showToast("Done")
+        else
+            showToast(it.exception?.message.toString())
+        function()
+    }
 }
