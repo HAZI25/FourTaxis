@@ -46,7 +46,6 @@ class RegisterFragment : Fragment(R.layout.fragment_register), View.OnClickListe
                                         restartActivity()
                                     else showToast(it.exception?.message.toString())
                                 }
-
                         } else showToast("Registration Failed. ${it.exception?.message.toString()}")
                     }
                 }

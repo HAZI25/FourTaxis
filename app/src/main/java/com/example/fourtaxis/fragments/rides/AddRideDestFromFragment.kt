@@ -14,17 +14,19 @@ class AddRideDestFromFragment : BaseChangeFragment(R.layout.fragment_add_ride_de
     override fun onStart() {
         super.onStart()
 
-        APP_ACTIVITY.ride = RideModel()
-
         spinner_rides_from.adapter = ArrayAdapter(
             APP_ACTIVITY,
             R.layout.spinner_item,
             resources.getStringArray(R.array.rides_dest)
         )
 
+        APP_ACTIVITY.ride = RideModel()
+
         fab_next_ride_dest_from.setOnClickListener {
-            APP_ACTIVITY.ride.from = spinner_rides_from.selectedItem.toString()
             APP_ACTIVITY.ride.creatorID = CURRENT_UID
-            replaceFragment(AddRideDestWhereFragment()) }
+            APP_ACTIVITY.ride.people.add(CURRENT_UID)
+            APP_ACTIVITY.ride.from = spinner_rides_from.selectedItem.toString()
+            replaceFragment(AddRideDestWhereFragment())
+        }
     }
 }

@@ -16,7 +16,4 @@ class AddRideDateFragment : BaseChangeFragment(R.layout.fragment_add_ride_date) 
             APP_ACTIVITY.ride.date = checkDateTimeDigit(datePicker.dayOfMonth) + '.' + checkDateTimeDigit(datePicker.month + 1) + '.' + datePicker.year.toString()
             replaceFragment(AddRideTimeFragment()) }
     }
-
-
-
 }

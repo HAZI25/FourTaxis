@@ -1,10 +1,13 @@
 package com.example.fourtaxis.database
 
 import android.net.Uri
+import com.example.fourtaxis.models.ContactItemModel
+import com.example.fourtaxis.models.MessageModel
 import com.example.fourtaxis.models.RideModel
 import com.example.fourtaxis.models.UserModel
 import com.example.fourtaxis.utils.showToast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
@@ -16,8 +19,12 @@ lateinit var AUTH: FirebaseAuth
 lateinit var FIRESTORE: FirebaseFirestore
 lateinit var REF_STORAGE: StorageReference
 
+const val MESSAGES = "messages"
 const val USERS = "users"
 const val RIDES = "rides"
+const val CONTACTS = "contact_list"
+const val USER_CONTACTS = "user_contacts"
+
 const val PHONE = "phone"
 const val BIO = "bio"
 const val FOLDER_PROFILE_IMAGE = "folder_profile_image"
@@ -56,12 +63,41 @@ inline fun putUrlToDatabase(url: String, crossinline function: () -> Unit) {
         .addOnFailureListener { showToast(it.message.toString()) }
 }
 
-inline fun createRide(ride: RideModel, crossinline function: () -> Unit) {
-    FIRESTORE.collection(RIDES).document(CURRENT_UID).set(ride, SetOptions.merge()).addOnCompleteListener {
-        if (it.isSuccessful)
-            showToast("Done")
-        else
-            showToast(it.exception?.message.toString())
-        function()
-    }
+fun createRide(ride: RideModel, function: () -> Unit) {
+    FIRESTORE.collection(RIDES).document(CURRENT_UID).set(ride, SetOptions.merge())
+        .addOnCompleteListener {
+            if (it.isSuccessful)
+                showToast("Done")
+            else
+                showToast(it.exception?.message.toString())
+            function()
+        }
+}
+
+fun sendMessage(message: String, received_id: String, function: () -> Unit) {
+    val messageKey = FIRESTORE.collection(MESSAGES).document().id
+
+    val messageModel = MessageModel()
+    messageModel.from = CURRENT_UID
+    messageModel.text = message
+    messageModel.timeStamp = FieldValue.serverTimestamp()
+
+    FIRESTORE.collection(MESSAGES)
+        .document(CURRENT_UID)
+        .collection(received_id)
+        .document(messageKey)
+        .set(messageModel).addOnSuccessListener {
+            FIRESTORE.collection(MESSAGES).document(received_id).collection(CURRENT_UID)
+                .document(messageKey).set(messageModel).addOnSuccessListener { function() }
+        }
+}
+
+fun saveToChatList(id: String) {
+    val contactItem = ContactItemModel()
+    contactItem.id = id
+    FIRESTORE.collection(CONTACTS).document(CURRENT_UID).collection(USER_CONTACTS).document(id)
+        .set(contactItem).addOnSuccessListener {
+            FIRESTORE.collection(CONTACTS).document(id).collection(USER_CONTACTS).document(CURRENT_UID)
+                .set(contactItem)
+        }
 }

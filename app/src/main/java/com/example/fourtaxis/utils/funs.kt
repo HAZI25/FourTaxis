@@ -7,6 +7,8 @@ import com.example.fourtaxis.R
 import com.example.fourtaxis.activities.MainActivity
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun replaceFragment(fragment: Fragment, addStack: Boolean = true) {
     val fm = APP_ACTIVITY.supportFragmentManager
@@ -34,4 +36,11 @@ fun CircleImageView.downloadAndSetImage(url: String) {
 fun checkDateTimeDigit(digit: Int): String {
     if (digit < 10) return "0$digit"
     return digit.toString()
+}
+
+fun String.asTime(): String {
+    val seconds = this.substringBefore(',').substringAfter('=') + "000"
+    val time = Date(seconds.toLong())
+    val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+    return timeFormat.format(time)
 }
