@@ -1,7 +1,7 @@
 package com.example.fourtaxis.database
 
 import android.net.Uri
-import com.example.fourtaxis.models.ContactItemModel
+import com.example.fourtaxis.models.ChatModel
 import com.example.fourtaxis.models.MessageModel
 import com.example.fourtaxis.models.RideModel
 import com.example.fourtaxis.models.UserModel
@@ -22,8 +22,8 @@ lateinit var REF_STORAGE: StorageReference
 const val MESSAGES = "messages"
 const val USERS = "users"
 const val RIDES = "rides"
-const val CONTACTS = "contact_list"
-const val USER_CONTACTS = "user_contacts"
+const val CHATS = "chats_list"
+const val CHATS_INTERLOCUTOR = "interlocutor"
 
 const val PHONE = "phone"
 const val BIO = "bio"
@@ -93,11 +93,9 @@ fun sendMessage(message: String, received_id: String, function: () -> Unit) {
 }
 
 fun saveToChatList(id: String) {
-    val contactItem = ContactItemModel()
-    contactItem.id = id
-    FIRESTORE.collection(CONTACTS).document(CURRENT_UID).collection(USER_CONTACTS).document(id)
-        .set(contactItem).addOnSuccessListener {
-            FIRESTORE.collection(CONTACTS).document(id).collection(USER_CONTACTS).document(CURRENT_UID)
-                .set(contactItem)
+    FIRESTORE.collection(CHATS).document(CURRENT_UID).collection(CHATS_INTERLOCUTOR).document(id)
+        .set(ChatModel(id)).addOnSuccessListener {
+            FIRESTORE.collection(CHATS).document(id).collection(CHATS_INTERLOCUTOR).document(CURRENT_UID)
+                .set(ChatModel(CURRENT_UID))
         }
 }

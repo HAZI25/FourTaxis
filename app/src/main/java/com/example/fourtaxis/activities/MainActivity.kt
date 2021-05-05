@@ -9,6 +9,7 @@ import com.example.fourtaxis.R
 import com.example.fourtaxis.database.AUTH
 import com.example.fourtaxis.database.initFirebase
 import com.example.fourtaxis.database.initUser
+import com.example.fourtaxis.fragments.chat.ChatsFragment
 import com.example.fourtaxis.fragments.login_register.LoginFragment
 import com.example.fourtaxis.fragments.profile.ProfileFragment
 import com.example.fourtaxis.fragments.rides.RidesFragment
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         when (item.itemId) {
             R.id.nav_rides -> replaceFragment(RidesFragment(), false)
             R.id.nav_profile -> replaceFragment(ProfileFragment(), false)
+            R.id.nav_chat -> replaceFragment(ChatsFragment(), false)
         }
         return true
     }
