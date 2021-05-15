@@ -19,12 +19,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onResume() {
         super.onResume()
         setHasOptionsMenu(true)
-        APP_ACTIVITY.main_toolbar.title = "Profile"
+        APP_ACTIVITY.main_toolbar.title = "Профиль"
         initFields()
     }
 
     private fun initFields() {
-        tv_profile_username.text = USER.fullName
+        tv_profile_fullname.text = USER.fullName
         tv_profile_email.text = USER.email
         tv_profile_phone.text = USER.phone
         tv_profile_bio.text = USER.bio
@@ -32,18 +32,15 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         profile_user_photo.setOnClickListener { changePhotoUser() }
 
-        cardView_profile_phone.setOnClickListener {
-            replaceFragment(ChangePhoneFragment())
-        }
-        cardView_profile_bio.setOnClickListener {
-            replaceFragment(ChangeBioFragment())
-        }
+        civ_profile_change_fullname.setOnClickListener { replaceFragment(ChangeFullnameFragment()) }
+        civ_profile_change_phone.setOnClickListener { replaceFragment(ChangePhoneFragment()) }
+        civ_profile_change_bio.setOnClickListener { replaceFragment(ChangeBioFragment()) }
     }
 
     private fun changePhotoUser() {
         CropImage.activity()
             .setAspectRatio(1, 1)
-            .setRequestedSize(600, 600)
+            .setRequestedSize(300, 300)
             .setCropShape(CropImageView.CropShape.OVAL)
             .start(APP_ACTIVITY, this)
     }

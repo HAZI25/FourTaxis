@@ -2,6 +2,7 @@
   <dictionary name="marse">
     <words>
       <w>firestore</w>
+      <w>fullname</w>
     </words>
   </dictionary>
 </component>

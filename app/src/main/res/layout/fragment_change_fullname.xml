@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.profile.ChangeBioFragment">
+    tools:context=".fragments.profile.ChangeFullnameFragment">
 
     <TextView
         android:id="@+id/tv_create_ride_dest_from"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/large_padding"
-        android:text="@string/change_bio_fragment_text"
+        android:text="@string/change_name_fragment_text"
         android:textColor="@color/black"
         android:textSize="@dimen/large_text"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,31 +21,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/large_margin"
-        android:layout_marginEnd="@dimen/large_padding"
-        android:backgroundTint="@color/purple_500"
-        android:hint="@string/profile_bio"
-        app:counterEnabled="true"
-        app:counterMaxLength="70"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:hint="@string/profile_fullname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_create_ride_dest_from">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_change_bio"
+            android:id="@+id/et_change_fullname"
             android:layout_width="match_parent"
-            tools:text="Студент ИВМиИТ"
+            android:layout_height="match_parent"
             android:inputType="text"
             android:textSize="@dimen/app_text"
-            android:layout_height="match_parent" />
+            tools:text="Marsel Nazirov" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_change_bio"
+        android:id="@+id/fab_change_fullname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/purple_500"
         android:layout_marginEnd="@dimen/app_margin"
+        android:backgroundTint="@color/purple_500"
         android:src="@drawable/ic_check"
         android:layout_marginBottom="@dimen/app_margin"
         app:layout_constraintBottom_toBottomOf="parent"

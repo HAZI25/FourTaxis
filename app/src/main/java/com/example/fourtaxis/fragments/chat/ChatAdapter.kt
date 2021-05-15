@@ -3,8 +3,8 @@ package com.example.fourtaxis.fragments.chat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fourtaxis.R
 import com.example.fourtaxis.database.CURRENT_UID
@@ -25,7 +25,7 @@ class ChatAdapter : RecyclerView.Adapter<ChatAdapter.ChatHolder>() {
 
     class ChatHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        val chatLayout: ConstraintLayout = view.contact_chat_layout
+        val chatLayout: FrameLayout = view.contact_chat_layout
         val userPhoto: CircleImageView = view.civ_contact_chat_photo
         val userFullname: TextView = view.tv_contact_chat_fullname
         val lastMessage: TextView = view.tv_contact_chat_last_message

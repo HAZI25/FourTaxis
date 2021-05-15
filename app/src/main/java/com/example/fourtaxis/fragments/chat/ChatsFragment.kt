@@ -9,17 +9,19 @@ import com.example.fourtaxis.database.CURRENT_UID
 import com.example.fourtaxis.database.FIRESTORE
 import com.example.fourtaxis.models.ChatModel
 import com.example.fourtaxis.utils.APP_ACTIVITY
+import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.android.synthetic.main.fragment_chats.*
 
 class ChatsFragment : Fragment(R.layout.fragment_chats) {
 
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: ChatAdapter
+    private lateinit var mChatListener: ListenerRegistration
     private var mListChats = emptyList<ChatModel>()
 
     override fun onStart() {
         super.onStart()
-        APP_ACTIVITY.mToolbar.title = "Контакты"
+        APP_ACTIVITY.mToolbar.title = "Чаты"
         initRecyclerView()
     }
 
@@ -28,12 +30,17 @@ class ChatsFragment : Fragment(R.layout.fragment_chats) {
         mAdapter = ChatAdapter()
         mRecyclerView.adapter = mAdapter
 
-        FIRESTORE.collection(CHATS).document(CURRENT_UID).collection(CHATS_INTERLOCUTOR)
+        mChatListener = FIRESTORE.collection(CHATS).document(CURRENT_UID).collection(CHATS_INTERLOCUTOR)
             .addSnapshotListener { value, error ->
                 value?.let {
                     mListChats = it.toObjects(ChatModel::class.java)
                     mAdapter.setList(mListChats)
                 }
             }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mChatListener.remove()
     }
 }

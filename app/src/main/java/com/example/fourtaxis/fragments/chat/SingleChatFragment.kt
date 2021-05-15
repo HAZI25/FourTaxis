@@ -51,12 +51,12 @@ class SingleChatFragment(private val user: UserModel) :
         mToolbarInfo.toolbar_chat_image.downloadAndSetImage(user.photoUrl)
         mToolbarInfo.toolbar_chat_fullname.text = user.fullName
 
-        chat_btn_send_message.setOnClickListener {
-            val message = chat_input_message.text.toString()
+        fab_send_message.setOnClickListener {
+            val message = et_message_text.text.toString()
             if (message.isNotEmpty())
                 sendMessage(message, user.id) {
                     saveToChatList(user.id)
-                    chat_input_message.setText("")
+                    et_message_text.setText("")
                 }
         }
     }

@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_ride_item_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/app_padding"
+    android:paddingTop="@dimen/app_padding"
+    android:paddingRight="@dimen/app_padding">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/cardView_ride_corner_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_ride"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout_peopleDateTime"
+                android:layout_width="@dimen/ride_layout_info_width"
+                android:layout_height="@dimen/ride_layout_info_height"
+                android:background="@color/purple_700"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_rides_people"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/app_margin"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/app_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="3/4" />
+
+                <TextView
+                    android:id="@+id/tv_rides_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/small_text"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_rides_time"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="Сегодня" />
+
+                <TextView
+                    android:id="@+id/tv_rides_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/small_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="10:10" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_layout_ride_dest"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/light_grey"
+                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout_peopleDateTime"
+                app:layout_constraintEnd_toEndOf="@id/constraint_layout_ride"
+                app:layout_constraintStart_toEndOf="@id/constraintLayout_peopleDateTime"
+                app:layout_constraintTop_toTopOf="@id/constraint_layout_ride">
+
+                <TextView
+                    android:id="@+id/textView_destA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ride_item_dest_from"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_rides_dest_from"
+                    app:layout_constraintStart_toStartOf="@+id/ride_dest_separate_view"
+                    app:layout_constraintTop_toTopOf="@+id/tv_rides_dest_from" />
+
+                <TextView
+                    android:id="@+id/tv_rides_dest_from"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/app_text"
+                    app:layout_constraintBottom_toTopOf="@+id/ride_dest_separate_view"
+                    app:layout_constraintEnd_toEndOf="@+id/ride_dest_separate_view"
+                    app:layout_constraintStart_toEndOf="@+id/textView_destA"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:text="Деревня Универсиады" />
+
+                <View
+                    android:id="@+id/ride_dest_separate_view"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="@dimen/app_margin"
+                    android:layout_marginEnd="@dimen/app_margin"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_rides_dest_where"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_rides_dest_from" />
+
+                <TextView
+                    android:id="@+id/textView_destB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ride_item_dest_where"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_rides_dest_where"
+                    app:layout_constraintStart_toStartOf="@+id/textView_destA"
+                    app:layout_constraintTop_toTopOf="@+id/tv_rides_dest_where" />
+
+                <TextView
+                    android:id="@+id/tv_rides_dest_where"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/app_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/ride_dest_separate_view"
+                    app:layout_constraintStart_toEndOf="@+id/textView_destB"
+                    app:layout_constraintTop_toBottomOf="@+id/ride_dest_separate_view"
+                    tools:text="УНИКС" />
+
+                <ImageView
+                    android:id="@+id/ride_drop_down"
+                    android:layout_width="@dimen/ride_drop_down_button_size"
+                    android:layout_height="@dimen/ride_drop_down_button_size"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_drop_down"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_ride_people"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/light_grey"
+                android:orientation="vertical"
+                android:padding="@dimen/small_padding"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/constraint_layout_ride"
+                app:layout_constraintStart_toStartOf="@id/constraint_layout_ride"
+                app:layout_constraintTop_toBottomOf="@id/constraintLayout_peopleDateTime"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:id="@+id/layout_ride_user1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/extra_small_padding">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civ_people_user1"
+                        android:layout_width="@dimen/ride_people_list_profile_image_size"
+                        android:layout_height="@dimen/ride_people_list_profile_image_size"
+                        android:src="@drawable/photo_placeholder"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_people_user1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/app_margin"
+                        android:layout_marginEnd="@dimen/large_margin"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        app:layout_constraintBottom_toBottomOf="@id/civ_people_user1"
+                        app:layout_constraintStart_toEndOf="@id/civ_people_user1"
+                        app:layout_constraintTop_toTopOf="@id/civ_people_user1"
+                        tools:text="Marsel Nazirov" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civ_ride_message_user1"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:backgroundTint="@color/purple_500"
+                        android:src="@drawable/ic_chat"
+                        android:visibility="gone"
+                        tools:visibility="visible"/>
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civ_ride_exit1"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:backgroundTint="@color/purple_500"
+                        android:src="@drawable/ic_close"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_ride_user_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civ_people_user_2"
+                        android:layout_width="@dimen/ride_people_list_profile_image_size"
+                        android:layout_height="@dimen/ride_people_list_profile_image_size"
+                        android:src="@drawable/ic_add"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/civ_people_user1" />
+
+                    <TextView
+                        android:id="@+id/tv_people_user_2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/app_margin"
+                        android:layout_marginEnd="@dimen/large_margin"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/ride_item_empty"
+                        app:layout_constraintBottom_toBottomOf="@id/civ_people_user_2"
+                        app:layout_constraintStart_toEndOf="@id/civ_people_user_2"
+                        app:layout_constraintTop_toTopOf="@id/civ_people_user_2" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civ_ride_message_user2"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:backgroundTint="@color/purple_500"
+                        android:src="@drawable/ic_chat"
+                        android:visibility="gone"
+                        tools:visibility="visible"/>
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civ_ride_exit2"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:backgroundTint="@color/purple_500"
+                        android:src="@drawable/ic_close"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_ride_user_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/extra_small_padding">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civ_people_user_3"
+                        android:layout_width="@dimen/ride_people_list_profile_image_size"
+                        android:layout_height="@dimen/ride_people_list_profile_image_size"
+                        android:src="@drawable/ic_add"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/civ_people_user_2" />
+
+                    <TextView
+                        android:id="@+id/tv_people_user_3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/app_margin"
+                        android:layout_marginEnd="@dimen/large_margin"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/ride_item_empty"
+                        app:layout_constraintBottom_toBottomOf="@id/civ_people_user_3"
+                        app:layout_constraintStart_toEndOf="@id/civ_people_user_3"
+                        app:layout_constraintTop_toTopOf="@id/civ_people_user_3" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civ_ride_message_user3"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:backgroundTint="@color/purple_500"
+                        android:src="@drawable/ic_chat"
+                        android:visibility="gone"
+                        tools:visibility="visible"/>
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civ_ride_exit3"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:backgroundTint="@color/purple_500"
+                        android:src="@drawable/ic_close"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_ride_user_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/extra_small_padding">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civ_people_user_4"
+                        android:layout_width="@dimen/ride_people_list_profile_image_size"
+                        android:layout_height="@dimen/ride_people_list_profile_image_size"
+                        android:src="@drawable/ic_add"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/civ_people_user_3" />
+
+                    <TextView
+                        android:id="@+id/tv_people_user_4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/app_margin"
+                        android:layout_marginEnd="@dimen/large_margin"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/ride_item_empty"
+                        app:layout_constraintBottom_toBottomOf="@id/civ_people_user_4"
+                        app:layout_constraintStart_toEndOf="@id/civ_people_user_4"
+                        app:layout_constraintTop_toTopOf="@id/civ_people_user_4" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civ_ride_message_user4"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:backgroundTint="@color/purple_500"
+                        android:src="@drawable/ic_chat"
+                        android:visibility="gone"
+                        tools:visibility="visible"/>
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civ_ride_exit4"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:backgroundTint="@color/purple_500"
+                        android:src="@drawable/ic_close"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

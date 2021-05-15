@@ -22,6 +22,20 @@
     <string name="register">Register</string>
     <string name="register_already_have_an_account">Already have an account?</string>
     <string name="login"><u>Login</u></string>
+    <string name="profile_fullname">Имя</string>
+    <string name="profile_email">Email</string>
+    <string name="profile_phone">Телефон</string>
+    <string name="profile_bio">О себе</string>
+    <string name="change_name_fragment_text">Как вас зовут?</string>
+    <string name="change_phone_fragment_text">Подтвердите номер телефона</string>
+    <string name="change_bio_fragment_text">Что бы вы хотели рассказать о себе?</string>
+    <string name="ride_item_empty">Пусто</string>
+    <string name="ride_item_dest_from">A:</string>
+    <string name="ride_item_dest_where">B:</string>
+    <string name="create_ride_from_text">Откуда будет совершена поездка?</string>
+    <string name="create_ride_where_text">Куда вы хотите поехать?</string>
+    <string name="create_ride_date_text">Выберите дату поездки</string>
+    <string name="create_ride_time_text">Выберите время поездки</string>
 
     <string-array name="rides_dest">
         <item>Деревня Универсиады</item>

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".fragments.rides.RidesFragment">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rides_recycler_view"
         android:layout_width="match_parent"
@@ -16,12 +15,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/rides_item"/>
+        tools:listitem="@layout/ride_item"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_ride"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/purple_500"
         android:layout_marginEnd="16dp"
         android:src="@drawable/ic_add"
         android:layout_marginBottom="16dp"

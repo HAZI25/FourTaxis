@@ -26,6 +26,7 @@ const val CHATS = "chats_list"
 const val CHATS_INTERLOCUTOR = "interlocutor"
 
 const val PHONE = "phone"
+const val FULLNAME = "fullname"
 const val BIO = "bio"
 const val FOLDER_PROFILE_IMAGE = "folder_profile_image"
 const val PHOTO_URL = "photoUrl"
@@ -97,5 +98,19 @@ fun saveToChatList(id: String) {
         .set(ChatModel(id)).addOnSuccessListener {
             FIRESTORE.collection(CHATS).document(id).collection(CHATS_INTERLOCUTOR).document(CURRENT_UID)
                 .set(ChatModel(CURRENT_UID))
+        }
+}
+
+fun addPersonToRide(ride: RideModel, function: () -> Unit) {
+    FIRESTORE.collection(RIDES).document(ride.creatorID)
+        .update("people", FieldValue.arrayUnion(CURRENT_UID)).addOnSuccessListener {
+            function()
+        }
+}
+
+fun deletePersonFromRide(ride: RideModel, function: () -> Unit) {
+    FIRESTORE.collection(RIDES).document(ride.creatorID)
+        .update("people", FieldValue.arrayRemove(CURRENT_UID)).addOnSuccessListener {
+            function()
         }
 }
