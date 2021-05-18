@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fourtaxis.R
 import com.example.fourtaxis.database.FIRESTORE
 import com.example.fourtaxis.database.RIDES
+import com.example.fourtaxis.database.USER
 import com.example.fourtaxis.models.RideModel
 import com.example.fourtaxis.utils.APP_ACTIVITY
-import com.example.fourtaxis.utils.replaceFragment
 import com.google.firebase.firestore.ListenerRegistration
-import kotlinx.android.synthetic.main.fragment_rides.*
+import kotlinx.android.synthetic.main.fragment_my_rides.*
 
 
-class RidesFragment : Fragment(R.layout.fragment_rides) {
+class MyRidesFragment : Fragment(R.layout.fragment_my_rides) {
 
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: RidesAdapter
@@ -22,28 +22,24 @@ class RidesFragment : Fragment(R.layout.fragment_rides) {
 
     override fun onResume() {
         super.onResume()
-        APP_ACTIVITY.mToolbar.title = "Поездки"
-
-        fab_add_ride.setOnClickListener { replaceFragment(AddRideDestFragment()) }
-
+        APP_ACTIVITY.mToolbar.title = "Мои Поездки"
         initRecyclerView()
     }
 
     private fun initRecyclerView() {
-        mRecyclerView = rides_recycler_view
+        mRecyclerView = my_ride_recycler_view
         mAdapter = RidesAdapter()
         mRecyclerView.adapter = mAdapter
 
         mRidesListener = FIRESTORE.collection(RIDES)
-            .orderBy("date")
-            .orderBy("time")
+            .whereEqualTo("creatorID", USER.rideId)
             .addSnapshotListener { value, error ->
-            value?.let {
-                mListRides = it.toObjects(RideModel::class.java)
-                mAdapter.setList(mListRides)
-            }
+                value?.let {
+                    mListRides = it.toObjects(RideModel::class.java)
+                    mAdapter.setList(mListRides)
+                }
                 Log.d("TAG", error?.message.toString())
-        }
+            }
     }
 
     override fun onPause() {

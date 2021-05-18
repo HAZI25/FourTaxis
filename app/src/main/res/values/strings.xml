@@ -9,19 +9,19 @@
 
 
     <!-- Login Fragment -->
-    <string name="login_register"><u>Register</u></string>
-    <string name="login_dont_have_an_account">Don\'t have an account?</string>
-    <string name="login_upper_case">LOGIN</string>
-    <string name="hint_password">Password</string>
+    <string name="login_to_register"><u>Зарегистрироваться</u></string>
+    <string name="register_to_login"><u>Войти</u></string>
+    <string name="login_dont_have_an_account">Нет аккаунта?</string>
+    <string name="login">Войти</string>
+    <string name="hint_password">Пароль</string>
     <string name="hint_email">Email</string>
 
     <!-- Register Fragment -->
-    <string name="register_create_an_account_upper_case">CREATE AN ACCOUNT</string>
-    <string name="register_full_name">Full name</string>
-    <string name="register_phone_number">Phone number</string>
-    <string name="register">Register</string>
-    <string name="register_already_have_an_account">Already have an account?</string>
-    <string name="login"><u>Login</u></string>
+    <string name="register_create_an_account_upper_case">Регистрация</string>
+    <string name="register_full_name">Имя</string>
+    <string name="register_phone_number">Телефон</string>
+    <string name="register">Создать</string>
+    <string name="register_already_have_an_account">Есть аккаунт?</string>
     <string name="profile_fullname">Имя</string>
     <string name="profile_email">Email</string>
     <string name="profile_phone">Телефон</string>
@@ -46,6 +46,6 @@
         <item>УНИКС</item>
         <item>Бутлерова 4</item>
         <item>Татарстан 2</item>
-        <item>Мартыны Межлаука 1</item>
+        <item>Мартына Межлаука 1</item>
     </string-array>
 </resources>

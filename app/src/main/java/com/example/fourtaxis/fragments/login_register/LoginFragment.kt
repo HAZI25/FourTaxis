@@ -4,6 +4,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.fourtaxis.R
 import com.example.fourtaxis.database.AUTH
+import com.example.fourtaxis.utils.APP_ACTIVITY
 import com.example.fourtaxis.utils.replaceFragment
 import com.example.fourtaxis.utils.restartActivity
 import com.example.fourtaxis.utils.showToast
@@ -15,6 +16,8 @@ class LoginFragment : Fragment(R.layout.fragment_login), View.OnClickListener {
 
         tv_register.setOnClickListener(this)
         btn_login.setOnClickListener(this)
+
+        APP_ACTIVITY.mToolbar.visibility = View.GONE
     }
 
     override fun onClick(view: View?) {
@@ -32,5 +35,10 @@ class LoginFragment : Fragment(R.layout.fragment_login), View.OnClickListener {
                     }
                 }
             }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        APP_ACTIVITY.mToolbar.visibility = View.VISIBLE
     }
 }

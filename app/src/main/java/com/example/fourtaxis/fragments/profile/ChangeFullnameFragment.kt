@@ -10,7 +10,7 @@ class ChangeFullnameFragment : BaseChangeFragment(R.layout.fragment_change_fulln
     override fun onStart() {
         super.onStart()
 
-        et_change_fullname.setText(USER.fullName)
+        et_change_fullname.setText(USER.fullname)
         fab_change_fullname.setOnClickListener {
             val hashMap = hashMapOf<String, Any>()
             val fullname = et_change_fullname.text.toString()
@@ -18,7 +18,7 @@ class ChangeFullnameFragment : BaseChangeFragment(R.layout.fragment_change_fulln
             FIRESTORE.collection(USERS).document(CURRENT_UID).update(hashMap)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
-                        USER.fullName = fullname
+                        USER.fullname = fullname
                         APP_ACTIVITY.supportFragmentManager.popBackStack()
                     } else showToast(it.exception?.message.toString())
                 }

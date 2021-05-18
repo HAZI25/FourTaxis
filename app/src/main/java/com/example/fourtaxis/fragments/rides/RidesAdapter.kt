@@ -3,6 +3,7 @@ package com.example.fourtaxis.fragments.rides
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -15,6 +16,7 @@ import com.example.fourtaxis.models.RideModel
 import com.example.fourtaxis.models.UserModel
 import com.example.fourtaxis.utils.downloadAndSetImage
 import com.example.fourtaxis.utils.replaceFragment
+import com.example.fourtaxis.utils.showToast
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.ride_item.view.*
 import java.text.SimpleDateFormat
@@ -40,6 +42,8 @@ class RidesAdapter : RecyclerView.Adapter<RidesAdapter.RideHolder>() {
         val constraintLayoutMain: ConstraintLayout = view.layout_ride_item_main
         val constraintLayoutPeople: LinearLayout = view.layout_ride_people
         val ride_drop_down: ImageView = view.ride_drop_down
+
+        val delete_ride: Button = view.btn_ride_delete
 
         val person1_name: TextView = view.tv_people_user1
         val person1_chat: CircleImageView = view.civ_ride_message_user1
@@ -85,6 +89,13 @@ class RidesAdapter : RecyclerView.Adapter<RidesAdapter.RideHolder>() {
             holder.day.text = setDate(mListRides[position].date)
             holder.peopleNeed.text = "${mListRides[position].people.size}/4"
 
+            if (mListRides[position].creatorID == CURRENT_UID)
+                holder.delete_ride.visibility = View.VISIBLE
+
+            holder.delete_ride.setOnClickListener {
+                rideOnClickListener(holder, position, holder.delete_ride)
+            }
+
             holder.ride_drop_down.setOnClickListener {
                 rideOnClickListener(holder, position, holder.ride_drop_down)
             }
@@ -113,6 +124,12 @@ class RidesAdapter : RecyclerView.Adapter<RidesAdapter.RideHolder>() {
             holder.person2_exit.setOnClickListener {
                 rideOnClickListener(holder, position, holder.person2_exit)
             }
+            holder.person3_exit.setOnClickListener {
+                rideOnClickListener(holder, position, holder.person3_exit)
+            }
+            holder.person4_exit.setOnClickListener {
+                rideOnClickListener(holder, position, holder.person4_exit)
+            }
         }
     }
 
@@ -134,15 +151,22 @@ class RidesAdapter : RecyclerView.Adapter<RidesAdapter.RideHolder>() {
                         updatePeopleInfo(holder, position)
                     }
                 }
-            holder.person1_chat ->
-                if (user1.id.isNotEmpty() && user1.id != CURRENT_UID)
-                    replaceFragment(SingleChatFragment(user1))
+
+            holder.delete_ride -> {
+                deleteRide(mListRides[position], user1, user2, user3, user4) {
+                    user1 = UserModel()
+                    user2 = UserModel()
+                    user3 = UserModel()
+                    user4 = UserModel()
+                }
+            }
+
             holder.person2_exit -> {
                 deletePersonFromRide(mListRides[position]) {
                     holder.person2_photo.setImageResource(R.drawable.ic_add)
                     holder.person2_name.text = "Пусто"
                     holder.person2_exit.visibility = View.GONE
-
+                    user2 = UserModel()
                 }
             }
             holder.person3_exit -> {
@@ -150,6 +174,7 @@ class RidesAdapter : RecyclerView.Adapter<RidesAdapter.RideHolder>() {
                     holder.person3_photo.setImageResource(R.drawable.ic_add)
                     holder.person3_name.text = "Пусто"
                     holder.person3_exit.visibility = View.GONE
+                    user3 = UserModel()
                 }
             }
             holder.person4_exit -> {
@@ -157,31 +182,48 @@ class RidesAdapter : RecyclerView.Adapter<RidesAdapter.RideHolder>() {
                     holder.person4_photo.setImageResource(R.drawable.ic_add)
                     holder.person4_name.text = "Пусто"
                     holder.person4_exit.visibility = View.GONE
+                    user4 = UserModel()
                 }
             }
             holder.person2_photo ->
-                if (user2.id.isEmpty() && !mListRides[position].people.contains(CURRENT_UID))
-                    addPersonToRide(mListRides[position]) {
-                        holder.person2_photo.downloadAndSetImage(USER.photoUrl)
-                        holder.person2_name.text = USER.fullName
-                        holder.person2_exit.visibility = View.VISIBLE
-                    }
+                FIRESTORE.collection(USERS).document(CURRENT_UID).get().addOnSuccessListener {
+                    val user = it.toObject(UserModel::class.java) ?: UserModel()
+                    if (user.rideId != "")
+                        showToast("Вы уже состоите в поездке")
+                    else if (user2.id.isEmpty() && !mListRides[position].people.contains(CURRENT_UID))
+                        addPersonToRide(mListRides[position]) {
+                            holder.person2_photo.downloadAndSetImage(USER.photoUrl)
+                            holder.person2_name.text = USER.fullname
+                            holder.person2_exit.visibility = View.VISIBLE
+                            updatePeopleInfo(holder, position)
+                        }
+                }
             holder.person3_photo ->
-                if (user3.id.isEmpty() && !mListRides[position].people.contains(CURRENT_UID))
-                    addPersonToRide(mListRides[position]) {
-                        holder.person3_photo.downloadAndSetImage(USER.photoUrl)
-                        holder.person3_name.text = USER.fullName
-                        holder.person3_exit.visibility = View.VISIBLE
-                        updatePeopleInfo(holder, position)
-                    }
+                FIRESTORE.collection(USERS).document(CURRENT_UID).get().addOnSuccessListener {
+                    val user = it.toObject(UserModel::class.java) ?: UserModel()
+                    if (user.rideId != "")
+                        showToast("Вы уже состоите в поездке")
+                    else if (user3.id.isEmpty() && !mListRides[position].people.contains(CURRENT_UID))
+                        addPersonToRide(mListRides[position]) {
+                            holder.person3_photo.downloadAndSetImage(USER.photoUrl)
+                            holder.person3_name.text = USER.fullname
+                            holder.person3_exit.visibility = View.VISIBLE
+                            updatePeopleInfo(holder, position)
+                        }
+                }
             holder.person4_photo ->
-                if (user4.id.isEmpty() && !mListRides[position].people.contains(CURRENT_UID))
-                    addPersonToRide(mListRides[position]) {
-                        holder.person4_photo.downloadAndSetImage(USER.photoUrl)
-                        holder.person4_name.text = USER.fullName
-                        holder.person4_exit.visibility = View.VISIBLE
-                        updatePeopleInfo(holder, position)
-                    }
+                FIRESTORE.collection(USERS).document(CURRENT_UID).get().addOnSuccessListener {
+                    val user = it.toObject(UserModel::class.java) ?: UserModel()
+                    if (user.rideId != "")
+                        showToast("Вы уже состоите в поездке")
+                    else if (user4.id.isEmpty() && !mListRides[position].people.contains(CURRENT_UID))
+                        addPersonToRide(mListRides[position]) {
+                            holder.person4_photo.downloadAndSetImage(USER.photoUrl)
+                            holder.person4_name.text = USER.fullname
+                            holder.person4_exit.visibility = View.VISIBLE
+                            updatePeopleInfo(holder, position)
+                        }
+                }
             holder.person1_chat -> replaceFragment(SingleChatFragment(user1))
             holder.person2_chat -> replaceFragment(SingleChatFragment(user2))
             holder.person3_chat -> replaceFragment(SingleChatFragment(user3))
@@ -189,6 +231,7 @@ class RidesAdapter : RecyclerView.Adapter<RidesAdapter.RideHolder>() {
         }
 
     }
+
 
     private fun setDate(date: String): String {
         val currentDate = Date()
@@ -236,7 +279,7 @@ class RidesAdapter : RecyclerView.Adapter<RidesAdapter.RideHolder>() {
         FIRESTORE.collection(USERS).document(mListRides[position].creatorID).get()
             .addOnSuccessListener {
                 user1 = it.toObject(UserModel::class.java) ?: UserModel()
-                holder.person1_name.text = user1.fullName
+                holder.person1_name.text = user1.fullname
                 holder.person1_photo.downloadAndSetImage(user1.photoUrl)
                 if (user1.id != CURRENT_UID)
                     holder.person1_chat.visibility = View.VISIBLE
@@ -246,7 +289,7 @@ class RidesAdapter : RecyclerView.Adapter<RidesAdapter.RideHolder>() {
                 .get()
                 .addOnSuccessListener {
                     user2 = it.toObject(UserModel::class.java) ?: UserModel()
-                    holder.person2_name.text = user2.fullName
+                    holder.person2_name.text = user2.fullname
                     holder.person2_photo.downloadAndSetImage(user2.photoUrl)
                     if (user2.id == CURRENT_UID)
                         holder.person2_exit.visibility = View.VISIBLE
@@ -259,7 +302,7 @@ class RidesAdapter : RecyclerView.Adapter<RidesAdapter.RideHolder>() {
                 .get()
                 .addOnSuccessListener {
                     user3 = it.toObject(UserModel::class.java) ?: UserModel()
-                    holder.person3_name.text = user3.fullName
+                    holder.person3_name.text = user3.fullname
                     holder.person3_photo.downloadAndSetImage(user3.photoUrl)
                     if (user3.id == CURRENT_UID)
                         holder.person3_exit.visibility = View.VISIBLE
@@ -272,7 +315,7 @@ class RidesAdapter : RecyclerView.Adapter<RidesAdapter.RideHolder>() {
                 .get()
                 .addOnSuccessListener {
                     user4 = it.toObject(UserModel::class.java) ?: UserModel()
-                    holder.person4_name.text = user4.fullName
+                    holder.person4_name.text = user4.fullname
                     holder.person4_photo.downloadAndSetImage(user4.photoUrl)
                     if (user4.id == CURRENT_UID)
                         holder.person4_exit.visibility = View.VISIBLE

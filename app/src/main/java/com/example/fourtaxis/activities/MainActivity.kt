@@ -12,6 +12,7 @@ import com.example.fourtaxis.database.initUser
 import com.example.fourtaxis.fragments.chat.ChatsFragment
 import com.example.fourtaxis.fragments.login_register.LoginFragment
 import com.example.fourtaxis.fragments.profile.ProfileFragment
+import com.example.fourtaxis.fragments.rides.MyRidesFragment
 import com.example.fourtaxis.fragments.rides.RidesFragment
 import com.example.fourtaxis.models.RideModel
 import com.example.fourtaxis.utils.APP_ACTIVITY
@@ -56,6 +57,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_rides -> replaceFragment(RidesFragment(), false)
+            R.id.nav_my_rides -> replaceFragment(MyRidesFragment(), false)
             R.id.nav_profile -> replaceFragment(ProfileFragment(), false)
             R.id.nav_chat -> replaceFragment(ChatsFragment(), false)
         }

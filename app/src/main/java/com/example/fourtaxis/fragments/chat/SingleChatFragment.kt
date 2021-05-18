@@ -49,7 +49,7 @@ class SingleChatFragment(private val user: UserModel) :
         mToolbarInfo = APP_ACTIVITY.mToolbar.toolbar_chat_info
         mToolbarInfo.visibility = View.VISIBLE
         mToolbarInfo.toolbar_chat_image.downloadAndSetImage(user.photoUrl)
-        mToolbarInfo.toolbar_chat_fullname.text = user.fullName
+        mToolbarInfo.toolbar_chat_fullname.text = user.fullname
 
         fab_send_message.setOnClickListener {
             val message = et_message_text.text.toString()

@@ -8,7 +8,10 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.example.fourtaxis.R
 import com.example.fourtaxis.database.*
-import com.example.fourtaxis.utils.*
+import com.example.fourtaxis.utils.APP_ACTIVITY
+import com.example.fourtaxis.utils.downloadAndSetImage
+import com.example.fourtaxis.utils.replaceFragment
+import com.example.fourtaxis.utils.restartActivity
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,7 +27,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun initFields() {
-        tv_profile_fullname.text = USER.fullName
+        tv_profile_fullname.text = USER.fullname
         tv_profile_email.text = USER.email
         tv_profile_phone.text = USER.phone
         tv_profile_bio.text = USER.bio
@@ -57,7 +60,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                     putUrlToDatabase(it) {
                         profile_user_photo.downloadAndSetImage(it)
                         USER.photoUrl = it
-                        showToast("Update")
                     }
                 }
             }

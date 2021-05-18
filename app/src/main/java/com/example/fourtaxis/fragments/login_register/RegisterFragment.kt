@@ -20,6 +20,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register), View.OnClickListe
 
         btn_register.setOnClickListener(this)
         tv_login.setOnClickListener(this)
+        APP_ACTIVITY.mToolbar.visibility = View.GONE
     }
 
     override fun onClick(view: View?) {
@@ -35,7 +36,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register), View.OnClickListe
                         if (it.isSuccessful) {
 
                             USER.id = AUTH.currentUser?.uid ?: ""
-                            USER.fullName = et_fullName.text.toString()
+                            USER.fullname = et_fullName.text.toString()
                             USER.phone = et_phoneNumber.text.toString()
                             USER.email = email
 
@@ -50,5 +51,10 @@ class RegisterFragment : Fragment(R.layout.fragment_register), View.OnClickListe
                     }
                 }
             }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        APP_ACTIVITY.mToolbar.visibility = View.VISIBLE
     }
 }

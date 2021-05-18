@@ -67,11 +67,11 @@ inline fun putUrlToDatabase(url: String, crossinline function: () -> Unit) {
 fun createRide(ride: RideModel, function: () -> Unit) {
     FIRESTORE.collection(RIDES).document(CURRENT_UID).set(ride, SetOptions.merge())
         .addOnCompleteListener {
-            if (it.isSuccessful)
-                showToast("Done")
-            else
+            if (it.isSuccessful) {
+                showToast("Поездка создана")
+                FIRESTORE.collection(USERS).document(CURRENT_UID).update("rideId", CURRENT_UID).addOnSuccessListener { function() }
+            } else
                 showToast(it.exception?.message.toString())
-            function()
         }
 }
 
@@ -96,7 +96,8 @@ fun sendMessage(message: String, received_id: String, function: () -> Unit) {
 fun saveToChatList(id: String) {
     FIRESTORE.collection(CHATS).document(CURRENT_UID).collection(CHATS_INTERLOCUTOR).document(id)
         .set(ChatModel(id)).addOnSuccessListener {
-            FIRESTORE.collection(CHATS).document(id).collection(CHATS_INTERLOCUTOR).document(CURRENT_UID)
+            FIRESTORE.collection(CHATS).document(id).collection(CHATS_INTERLOCUTOR)
+                .document(CURRENT_UID)
                 .set(ChatModel(CURRENT_UID))
         }
 }
@@ -104,13 +105,41 @@ fun saveToChatList(id: String) {
 fun addPersonToRide(ride: RideModel, function: () -> Unit) {
     FIRESTORE.collection(RIDES).document(ride.creatorID)
         .update("people", FieldValue.arrayUnion(CURRENT_UID)).addOnSuccessListener {
-            function()
+            FIRESTORE.collection(USERS).document(CURRENT_UID).update("rideId", ride.creatorID)
+                .addOnCompleteListener {
+                    USER.rideId = ride.creatorID
+                    function()
+                }
         }
 }
 
 fun deletePersonFromRide(ride: RideModel, function: () -> Unit) {
     FIRESTORE.collection(RIDES).document(ride.creatorID)
         .update("people", FieldValue.arrayRemove(CURRENT_UID)).addOnSuccessListener {
-            function()
+            FIRESTORE.collection(USERS).document(CURRENT_UID).update("rideId", "")
+                .addOnCompleteListener {
+                    USER.rideId = ""
+                    function()
+                }
         }
+}
+
+fun deleteRide(
+    rideModel: RideModel,
+    user1: UserModel,
+    user2: UserModel,
+    user3: UserModel,
+    user4: UserModel,
+    function: () -> Unit
+) {
+    FIRESTORE.collection(RIDES).document(rideModel.creatorID).delete().addOnSuccessListener {
+        FIRESTORE.collection(USERS).document(user1.id).update("rideId", "")
+        if (user2.id != "")
+            FIRESTORE.collection(USERS).document(user2.id).update("rideId", "")
+        if (user3.id != "")
+            FIRESTORE.collection(USERS).document(user3.id).update("rideId", "")
+        if (user4.id != "")
+            FIRESTORE.collection(USERS).document(user4.id).update("rideId", "")
+        function()
+    }
 }

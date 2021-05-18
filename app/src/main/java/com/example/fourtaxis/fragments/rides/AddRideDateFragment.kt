@@ -1,6 +1,8 @@
 package com.example.fourtaxis.fragments.rides
 
 import com.example.fourtaxis.R
+import com.example.fourtaxis.database.CURRENT_UID
+import com.example.fourtaxis.database.USER
 import com.example.fourtaxis.database.createRide
 import com.example.fourtaxis.fragments.profile.BaseChangeFragment
 import com.example.fourtaxis.utils.APP_ACTIVITY
@@ -13,10 +15,13 @@ class AddRideDateFragment : BaseChangeFragment(R.layout.fragment_add_ride_date) 
     override fun onStart() {
         super.onStart()
 
+        timePicker.setIs24HourView(true)
+
         fab_create_ride.setOnClickListener {
             APP_ACTIVITY.ride.date = checkDateTimeDigit(datePicker.dayOfMonth) + '.' + checkDateTimeDigit(datePicker.month + 1) + '.' + datePicker.year.toString()
             APP_ACTIVITY.ride.time = checkDateTimeDigit(timePicker.hour) + ':' + checkDateTimeDigit(timePicker.minute)
             createRide(APP_ACTIVITY.ride) {
+                USER.rideId = CURRENT_UID
                 replaceFragment(RidesFragment())
             }
         }

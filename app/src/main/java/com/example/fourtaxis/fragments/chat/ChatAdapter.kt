@@ -43,7 +43,7 @@ class ChatAdapter : RecyclerView.Adapter<ChatAdapter.ChatHolder>() {
         FIRESTORE.collection(USERS).document(mListChats[position].id).get().addOnSuccessListener {
             val user = it.toObject(UserModel::class.java) ?: UserModel()
             holder.userPhoto.downloadAndSetImage(user.photoUrl)
-            holder.userFullname.text = user.fullName
+            holder.userFullname.text = user.fullname
             FIRESTORE.collection(MESSAGES).document(CURRENT_UID).collection(mListChats[position].id)
                 .orderBy("timeStamp")
                 .addSnapshotListener { value, error ->

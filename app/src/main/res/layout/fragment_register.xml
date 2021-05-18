@@ -14,6 +14,7 @@
         android:text="@string/register_create_an_account_upper_case"
         android:textAlignment="center"
         android:textColor="@color/black"
+        android:fontFamily="@font/montserrat"
         android:textSize="@dimen/large_text"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
@@ -34,12 +35,14 @@
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:startIconDrawable="@drawable/ic_profile"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_fullName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fontFamily="@font/montserrat"
             android:hint="@string/register_full_name"
             android:inputType="text" />
 
@@ -66,6 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/register_phone_number"
+            android:fontFamily="@font/montserrat"
             android:inputType="text" />
 
 
@@ -88,6 +92,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_email"
+            android:fontFamily="@font/montserrat"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/hint_email" />
@@ -115,6 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/hint_password"
+            android:fontFamily="@font/montserrat"
             android:inputType="textPassword"
             tools:layout_editor_absoluteY="5dp" />
 
@@ -126,6 +132,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/average_margin"
         android:layout_marginEnd="@dimen/average_margin"
+        android:fontFamily="@font/montserrat"
+        android:textStyle="bold"
         android:layout_marginBottom="@dimen/small_margin"
         android:text="@string/register"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -143,6 +151,7 @@
 
         <TextView
             android:layout_width="wrap_content"
+            android:fontFamily="@font/montserrat"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/small_margin"
             android:text="@string/register_already_have_an_account"
@@ -152,8 +161,9 @@
             android:id="@+id/tv_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
             android:foreground="?attr/selectableItemBackground"
-            android:text="@string/login"
+            android:text="@string/register_to_login"
             android:textSize="@dimen/small_text"
             android:textStyle="bold" />
 

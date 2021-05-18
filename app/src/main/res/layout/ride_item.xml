@@ -37,6 +37,7 @@
                     android:layout_marginTop="@dimen/app_margin"
                     android:textColor="@color/white"
                     android:textSize="@dimen/app_text"
+                    android:fontFamily="@font/montserrat"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -47,6 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
+                    android:fontFamily="@font/montserrat"
                     android:textSize="@dimen/small_text"
                     app:layout_constraintBottom_toTopOf="@+id/tv_rides_time"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -59,6 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/small_margin"
                     android:textColor="@color/white"
+                    android:fontFamily="@font/montserrat"
                     android:textSize="@dimen/small_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -81,6 +84,7 @@
                     android:id="@+id/textView_destA"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
                     android:text="@string/ride_item_dest_from"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_rides_dest_from"
                     app:layout_constraintStart_toStartOf="@+id/ride_dest_separate_view"
@@ -93,6 +97,7 @@
                     android:layout_marginBottom="@dimen/small_margin"
                     android:textAlignment="center"
                     android:textColor="@color/black"
+                    android:fontFamily="@font/montserrat"
                     android:textSize="@dimen/app_text"
                     app:layout_constraintBottom_toTopOf="@+id/ride_dest_separate_view"
                     app:layout_constraintEnd_toEndOf="@+id/ride_dest_separate_view"
@@ -117,6 +122,7 @@
                     android:id="@+id/textView_destB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
                     android:text="@string/ride_item_dest_where"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_rides_dest_where"
                     app:layout_constraintStart_toStartOf="@+id/textView_destA"
@@ -126,6 +132,7 @@
                     android:id="@+id/tv_rides_dest_where"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
                     android:layout_marginTop="@dimen/small_margin"
                     android:textAlignment="center"
                     android:textColor="@color/black"
@@ -179,6 +186,7 @@
                     <TextView
                         android:id="@+id/tv_people_user1"
                         android:layout_width="0dp"
+                        android:fontFamily="@font/montserrat"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/app_margin"
                         android:layout_marginEnd="@dimen/large_margin"
@@ -230,6 +238,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/app_margin"
+                        android:fontFamily="@font/montserrat"
                         android:layout_marginEnd="@dimen/large_margin"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
@@ -279,6 +288,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/app_margin"
                         android:layout_marginEnd="@dimen/large_margin"
+                        android:fontFamily="@font/montserrat"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:text="@string/ride_item_empty"
@@ -329,6 +339,7 @@
                         android:layout_marginEnd="@dimen/large_margin"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
+                        android:fontFamily="@font/montserrat"
                         android:text="@string/ride_item_empty"
                         app:layout_constraintBottom_toBottomOf="@id/civ_people_user_4"
                         app:layout_constraintStart_toEndOf="@id/civ_people_user_4"
@@ -352,6 +363,15 @@
                         android:visibility="gone"
                         tools:visibility="visible" />
                 </LinearLayout>
+
+                <Button
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    android:fontFamily="@font/montserrat"
+                    android:id="@+id/btn_ride_delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Удалить поездку"/>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

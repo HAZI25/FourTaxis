@@ -11,72 +11,64 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chat_recycler_view"
         android:layout_width="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_height="0dp"
-        tools:listitem="@layout/message_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/send_message_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/message_item" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/send_message_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#393939"
+        android:background="#DFDFDF"
+        android:paddingTop="@dimen/small_padding"
+        android:paddingBottom="@dimen/small_padding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-<!--        <com.google.android.material.textfield.TextInputLayout-->
-<!--            android:id="@+id/message_et_layout"-->
-<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--            android:layout_width="0dp"-->
-<!--            app:boxBackgroundColor="@color/light_grey"-->
-<!--            android:layout_height="55dp"-->
-<!--            app:boxCornerRadiusBottomEnd="30dp"-->
-<!--            app:boxCornerRadiusBottomStart="30dp"-->
-<!--            app:boxCornerRadiusTopEnd="30dp"-->
-<!--            android:layout_marginStart="@dimen/small_margin"-->
-<!--            android:layout_marginEnd="@dimen/small_margin"-->
-<!--            app:boxCornerRadiusTopStart="30dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toStartOf="@+id/fab_send_message"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent">-->
-
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:id="@+id/et_message_text"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:hint="Сообщение" />-->
-
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
-
         <EditText
             android:id="@+id/et_message_text"
-            android:layout_marginStart="@dimen/small_margin"
             android:layout_width="0dp"
-            android:hint="Сообщения"
-            android:layout_height="40dp"
-            android:includeFontPadding="true"
-            android:paddingStart="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
             android:layout_marginEnd="@dimen/small_margin"
             android:background="@drawable/message_send_edit_text"
-            app:layout_constraintStart_toStartOf="parent"
+            android:hint="Сообщения"
+            android:minLines="2"
+            android:maxLines="3"
+            android:includeFontPadding="true"
+            android:inputType="textMultiLine"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/fab_send_message"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+        <!--        android:id="@+id/fab_send_message"-->
+        <!--        app:fabSize="mini"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        app:fabCustomSize="40dp"-->
+        <!--        android:scaleType="center"-->
+        <!--        android:src="@drawable/ic_send"-->
+        <!--        android:layout_marginEnd="@dimen/small_margin"-->
+        <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--        app:layout_constraintEnd_toEndOf="parent"-->
+        <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+        <ImageView
             android:id="@+id/fab_send_message"
-            app:fabSize="mini"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fabCustomSize="40dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="@dimen/small_margin"
             android:scaleType="center"
             android:src="@drawable/ic_send"
-            android:layout_marginEnd="@dimen/small_margin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
